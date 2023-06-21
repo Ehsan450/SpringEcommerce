@@ -1,6 +1,6 @@
 package com.example.ecommerce.utils;
 
-public enum OrderStatusEnum {
+public enum OrderStatus {
     CONFIRMED,
     CANCELLED
 }

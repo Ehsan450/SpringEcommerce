@@ -1,12 +1,14 @@
 package com.example.ecommerce.entity;
 
-import com.example.ecommerce.utils.OrderStatusEnum;
+import com.example.ecommerce.utils.OrderStatus;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.antlr.v4.runtime.misc.NotNull;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import java.time.LocalDateTime;
 
@@ -14,30 +16,29 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Getter
 @Setter
+@DynamicInsert
+@DynamicUpdate
 @Entity
 @Table(name = "orders")
 public class Order {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int orderId;
+    private Integer orderId;
 
     @NotNull
-    @Column(name = "total_payable",nullable = false)
-    private double totalPayable;
-
+    @Column(name = "total_payable", nullable = false)
+    private Double totalPayable;
 
     @NotNull
-    @Column(name = "order_status",nullable = false)
-    private OrderStatusEnum orderStatus;
-
+    @Column(name = "order_status", nullable = false)
+    private OrderStatus orderStatus;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "ordered_by", referencedColumnName = "username")
-
     private User orderedBy;
 
-
     @NotNull
-    @Column(name = "ordered_on",nullable = false)
+    @Column(name = "ordered_on", nullable = false)
     private LocalDateTime orderedOn;
 }

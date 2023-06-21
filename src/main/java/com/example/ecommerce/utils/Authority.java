@@ -1,6 +1,6 @@
 package com.example.ecommerce.utils;
 
-public enum AuthorityEnum {
+public enum Authority {
     ROLE_ADMIN,
     ROLE_USER
 }

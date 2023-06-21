@@ -1,25 +1,27 @@
 package com.example.ecommerce.entity;
 
-import com.example.ecommerce.utils.OrderStatusEnum;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.antlr.v4.runtime.misc.NotNull;
-
-import java.time.LocalDateTime;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
+@DynamicInsert
+@DynamicUpdate
 @Entity
 @Table(name = "ordered_products")
 public class OrderedProduct {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long orderedProductId;
+    private Long orderedProductId;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "product_ref", referencedColumnName = "id")
@@ -27,13 +29,13 @@ public class OrderedProduct {
 
 
     @NotNull
-    @Column(name = "quantity",nullable = false)
-    private int quantity;
+    @Column(name = "quantity", nullable = false)
+    private Integer quantity;
 
 
     @NotNull
-    @Column(name = "price_per_unit",nullable = false)
-    private double pricePerUnit;
+    @Column(name = "price_per_unit", nullable = false)
+    private Double pricePerUnit;
 
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
