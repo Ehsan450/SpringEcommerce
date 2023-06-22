@@ -18,14 +18,12 @@ spring:
     username: root
     password: Ethan450
   mvc:
-    hiddenmethod:
+    hidden-method:
       filter:
         enabled: true
   jpa:
     open-in-view: false
     show-sql: false
-    hibernate:
-      ddl-auto: update
 management:
   endpoint:
     health:

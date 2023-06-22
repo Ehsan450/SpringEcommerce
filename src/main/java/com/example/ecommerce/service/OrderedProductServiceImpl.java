@@ -20,4 +20,5 @@ public class OrderedProductServiceImpl implements OrderedProductService {
     public OrderedProduct save(OrderedProduct orderedProduct) {
         return this.orderedProductRepository.saveAndFlush(orderedProduct);
     }
+    //save er upor alltym put transactional;
 }
