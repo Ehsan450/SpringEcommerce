@@ -10,4 +10,7 @@ public interface UserService {
 
     Optional<User> user(String username);
 
+    void delete(String username);
+    User save(User user);
+
 }

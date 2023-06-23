@@ -4,7 +4,9 @@ import com.example.ecommerce.entity.OrderedProduct;
 import com.example.ecommerce.repository.OrderedProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OrderedProductServiceImpl implements OrderedProductService {
@@ -12,13 +14,27 @@ public class OrderedProductServiceImpl implements OrderedProductService {
 
     @Autowired
     public OrderedProductServiceImpl(OrderedProductRepository orderedProductRepository) {
+
         this.orderedProductRepository = orderedProductRepository;
     }
 
     @Override
-    @Transactional
-    public OrderedProduct save(OrderedProduct orderedProduct) {
-        return this.orderedProductRepository.saveAndFlush(orderedProduct);
+    public List<OrderedProduct> orderedProducts() {
+        return orderedProductRepository.findAll();
     }
-    //save er upor alltym put transactional;
+
+    @Override
+    public Optional<OrderedProduct> orderedProduct(long id) {
+        return orderedProductRepository.findById(id);
+    }
+
+    @Override
+    public void delete(long id) {
+        orderedProductRepository.deleteById(id);
+    }
+
+    @Override
+    public OrderedProduct save(OrderedProduct orderedProduct) {
+        return orderedProductRepository.saveAndFlush(orderedProduct);
+    }
 }

@@ -28,4 +28,14 @@ public class UserServiceImpl implements UserService {
         return userRepository.findById(username);
     }
 
+    @Override
+    public void delete(String username) {
+        userRepository.deleteById(username);
+    }
+
+    @Override
+    public User save(User user) {
+        return userRepository.saveAndFlush(user);
+    }
+
 }
